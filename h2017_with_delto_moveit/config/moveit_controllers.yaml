@@ -19,7 +19,7 @@ moveit_simple_controller_manager:
     action_ns: follow_joint_trajectory
     default: true
   gripper_action_controller:
-    type: GripperCommand
+    type: FollowJointTrajectory
     joints:
       - F1M1
       - F1M2
@@ -33,5 +33,5 @@ moveit_simple_controller_manager:
       - F3M2
       - F3M3
       - F3M4
-    action_ns: gripper_cmd
+    action_ns: follow_joint_trajectory
     default: true

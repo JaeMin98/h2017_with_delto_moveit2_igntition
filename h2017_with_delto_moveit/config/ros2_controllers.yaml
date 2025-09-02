@@ -8,7 +8,7 @@ controller_manager:
 
 
     gripper_action_controller:
-      type: position_controllers/GripperActionController
+      type: joint_trajectory_controller/JointTrajectoryController
 
 
     joint_state_broadcaster:
@@ -30,4 +30,21 @@ arm_trajectory_controller:
       - velocity
 gripper_action_controller:
   ros__parameters:
-    joint: F1M1
+    joints:
+      - F1M1
+      - F1M2
+      - F1M3
+      - F1M4
+      - F2M1
+      - F2M2
+      - F2M3
+      - F2M4
+      - F3M1
+      - F3M2
+      - F3M3
+      - F3M4
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+      - velocity

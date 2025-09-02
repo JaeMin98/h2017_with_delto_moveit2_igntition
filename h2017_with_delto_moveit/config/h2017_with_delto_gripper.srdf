@@ -11,14 +11,12 @@
     <!--SUBGROUPS: Groups can also be formed by referencing to already defined group names-->
     <group name="arm">
         <link name="base_link"/>
-        <link name="base"/>
         <link name="link_1"/>
         <link name="link_2"/>
         <link name="link_3"/>
         <link name="link_4"/>
         <link name="link_5"/>
         <link name="link_6"/>
-        <joint name="base_link-base"/>
         <joint name="joint_1"/>
         <joint name="joint_2"/>
         <joint name="joint_3"/>
@@ -28,22 +26,34 @@
         <chain base_link="base_link" tip_link="link_6"/>
     </group>
     <group name="gripper">
-        <joint name="ee_joint"/>
+        <link name="delto_base_link"/>
+        <link name="F1_01"/>
+        <link name="F1_02"/>
+        <link name="F1_03"/>
+        <link name="F1_04"/>
+        <link name="F1_TIP"/>
+        <link name="F2_01"/>
+        <link name="F2_02"/>
+        <link name="F2_03"/>
+        <link name="F2_04"/>
+        <link name="F2_TIP"/>
+        <link name="F3_01"/>
+        <link name="F3_02"/>
+        <link name="F3_03"/>
+        <link name="F3_04"/>
+        <link name="F3_TIP"/>
         <joint name="F1M1"/>
         <joint name="F1M2"/>
         <joint name="F1M3"/>
         <joint name="F1M4"/>
-        <joint name="TIP1"/>
         <joint name="F2M1"/>
         <joint name="F2M2"/>
         <joint name="F2M3"/>
         <joint name="F2M4"/>
-        <joint name="TIP2"/>
         <joint name="F3M1"/>
         <joint name="F3M2"/>
         <joint name="F3M3"/>
         <joint name="F3M4"/>
-        <joint name="TIP3"/>
     </group>
     <!--END EFFECTOR: Purpose: Represent information about an end effector.-->
     <end_effector name="eef" parent_link="link_6" group="gripper"/>
