@@ -1,0 +1,162 @@
+<mujoco model="dg3f">
+    <!--
+        delto_gripper_3f.xml
+        Licensed under the BSD-3-Clause
+        Copyright (c) 2025 Tesollo Inc.
+        See LICENSE file for details.
+
+        Reference:
+        * https://tesollo.com/dg-3f/
+    -->
+    <compiler angle="radian" meshdir="assets" texturedir="texture" autolimits="true"/>
+    <asset>
+        <!--Robot Gripper-->
+        <mesh file="mount/mount.STL"/>
+        <mesh file="dg3f/base_link.STL"/>
+        <mesh file="dg3f/l_1_1.STL"/>
+        <mesh file="dg3f/l_1_2.STL"/>
+        <mesh file="dg3f/l_1_3.STL"/>
+        <mesh file="dg3f/l_1_4.STL"/>
+        <mesh file="dg3f/l_1_tip.STL"/>
+        <mesh file="dg3f/l_2_1.STL"/>
+        <mesh file="dg3f/l_2_2.STL"/>
+        <mesh file="dg3f/l_2_3.STL"/>
+        <mesh file="dg3f/l_2_4.STL"/>
+        <mesh file="dg3f/l_2_tip.STL"/>
+    </asset>
+
+    <default class="main">
+        <default class="robot">
+            <joint type="hinge" axis="0 0 1" springdamper="1e-2 50.0" armature="1e-3"/>
+            <geom density="800"/>
+
+            <default class="visual">
+                <geom type="mesh" group="1" contype="0" conaffinity="0"/>
+
+                <!--Robot Gripper-->
+                <default class="visual_mount">
+                    <geom mesh="mount" />
+                </default>
+
+                <default class="visual_base_dg">
+                    <geom mesh="base_link" />
+                </default>
+                <default class="visual_l_1_1">
+                    <geom mesh="l_1_1" />
+                </default>
+                <default class="visual_l_1_2">
+                    <geom mesh="l_1_2" />
+                </default>
+                <default class="visual_l_1_3">
+                    <geom mesh="l_1_3" />
+                </default>
+                <default class="visual_l_1_4">
+                    <geom mesh="l_1_4" />
+                </default>
+                <default class="visual_l_1_tip">
+                    <geom mesh="l_1_tip" />
+                </default>
+
+                <default class="visual_l_2_1">
+                    <geom mesh="l_2_1" />
+                </default>
+                <default class="visual_l_2_2">
+                    <geom mesh="l_2_2" />
+                </default>
+                <default class="visual_l_2_3">
+                    <geom mesh="l_2_3" />
+                </default>
+                <default class="visual_l_2_4">
+                    <geom mesh="l_2_4" />
+                </default>
+                <default class="visual_l_2_tip">
+                    <geom mesh="l_2_tip" />
+                </default>
+            </default>
+        </default>
+    </default>
+
+    <worldbody>
+        <!--Camera parameters-->
+        <camera name="main" mode="fixed" target="base_link_dg" pos="2 2 2.7" axisangle="2 2 -2 1"/>
+        <camera name="top_down" mode="fixed" target="base_link_dg" pos="0 -0.6 2.0" axisangle="2 2 2 0"/>
+        <camera name="side" mode="fixed" target="base_link_dg" pos="0.8 -0.6 1.0" quat="0.5 0.5 0.5 0.5"/>
+
+        <body name="l_mount" pos="0.0 0.0823 0.0" quat="0.7071068 0.0 0.0 -0.7071068">
+            <geom class="visual_mount"/>
+            <!--Gripper parameters-->
+            <body name="base_link_dg" pos="-0.003 0.0 0.0" quat="0.7071068 0.0 -0.7071068 0.0" childclass="robot">
+                <body name="ref_link" pos="0.0 0.0 0.220" quat="0 1 0 0"/> 
+                <geom class="visual_base_dg" />
+                <body name="l_1_1" pos="0.0265 0.0 0.06435" >
+                    <geom class="visual_l_1_1"/>
+                    <joint name="j_1_1" pos="0.0 0.0 0.0" axis="0 0 1" limited="true" range="-6.28 6.28"/>
+                    <body name="l_1_2" pos="-0.00115 0.0 0.04235" >
+                        <geom class="visual_l_1_2"/>
+                        <joint name="j_1_2" pos="0.0 0.0 0.0" axis="1 0 0" limited="true" range="-6.28 6.28"/>
+                        <body name="l_1_3" pos="0.03258 0.0 0.02022">
+                            <geom class="visual_l_1_3"/>
+                            <joint name="j_1_3" pos="0.0 0.0 0.0" axis="0 -1 0" limited="true" range="-6.28 6.28"/>
+                            <body name="l_1_4" pos="0.0434 0.0 0.0" >
+                                <joint name="j_1_4" pos="0.0 0.0 0.0" axis="0 -1 0" limited="true" range="-6.28 6.28"/>
+                                <geom class="visual_l_1_4"/> 
+                                <body name="l_1_tip" pos="0.0315 0.0 0.0" >
+                                    <inertial mass="0.015" pos="0.045 -4.360e-4 -7.220e-8" fullinertia="9.617e-7 1.595e-6 1.300e-6 3.158e-8 2.069e-12 1.087e-11"/>
+                                    <geom class="visual_l_1_tip"/>
+                                </body>
+                            </body>
+                        </body>
+                    </body>
+                </body>
+                <body name="l_2_1" pos="-0.01334 0.023 0.06435">
+                    <geom class="visual_l_2_1"/>
+                    <joint name="j_2_1" pos="0.0 0.0 0.0" axis="0 0 1" limited="true" range="-6.28 6.28"/>
+                    <inertial mass="0.046" pos="3.906e-4 3.121e-8 -0.014" fullinertia="1.675e-5 1.924e-5 6.292e-6 2.001e-11 1.928e-6 2.206e-11"/>
+                    <body name="l_2_2" pos="0.00115 0.0 0.04235" >
+                        <geom class="visual_l_2_2"/>
+                        <joint name="j_2_2" pos="0.0 0.0 0.0" axis="-1 0 0" limited="true" range="-6.28 6.28"/>
+                        <inertial mass="0.027" pos="0.01 3.444e-6 0.016" fullinertia="6.787e-6 6.313e-6 3.652e-6 -4.808e-9 -1.152e-6 -7.457e-9"/>
+                        <body name="l_2_3" pos="-0.03258 0.0 0.02022" >
+                            <geom class="visual_l_2_3"/>
+                            <joint name="j_2_3" pos="0.0 0.0 0.0" axis="0 1 0" limited="true" range="-6.28 6.28"/>
+                            <inertial mass="0.045" pos="0.014 -4.527e-4 -3.953e-5" fullinertia="6.508e-6 1.691e-5 1.494e-5 1.513e-7 -4.796e-8 2.389e-9"/>
+                            <body name="l_2_4" pos="-0.0434 0.0 0.0" >
+                                <geom class="visual_l_2_4"/>
+                                <joint name="j_2_4" pos="0.0 0.0 0.0" axis="0 1 0" limited="true" range="-6.28 6.28"/>
+                                <inertial mass="0.041" pos="0.012 -2.269e-4 -4.676e-5" fullinertia="5.331e-6 1.086e-5 9.902e-6 -6.732e-8 -1.806e-8 6.130e-10"/>
+                                <body name="l_2_tip" pos="-0.0315 0.0 0.0" >
+                                    <geom class="visual_l_2_tip"/>
+                                    <inertial mass="0.015" pos="0.045 -4.360e-4 -7.220e-8" fullinertia="9.617e-7 1.595e-6 1.300e-6 3.158e-8 2.069e-12 1.087e-11"/>
+                                </body>
+                            </body>
+                        </body>
+                    </body>
+                </body>
+                <body name="l_3_1" pos="-0.01334 -0.023 0.06435" >
+                    <geom class="visual_l_2_1"/>
+                    <joint name="j_3_1" pos="0.0 0.0 0.0" axis="0 0 1" limited="true" range="-6.28 6.28"/>
+                    <inertial mass="0.046" pos="3.906e-4 3.121e-8 -0.014" fullinertia="1.675e-5 1.924e-5 6.292e-6 2.001e-11 1.928e-6 2.206e-11"/>
+                    <body name="l_3_2" pos="0.00115 0.0 0.04235" >
+                        <geom class="visual_l_2_2"/>
+                        <joint name="j_3_2" pos="0.0 0.0 0.0" axis="-1 0 0" limited="true" range="-6.28 6.28"/>
+                        <inertial mass="0.027" pos="0.01 3.444e-6 0.016" fullinertia="6.787e-6 6.313e-6 3.652e-6 -4.808e-9 -1.152e-6 -7.457e-9"/>
+                        <body name="l_3_3" pos="-0.03258 0.0 0.02022" >
+                            <geom class="visual_l_2_3"/>
+                            <joint name="j_3_3" pos="0.0 0.0 0.0" axis="0 1 0" limited="true" range="-6.28 6.28"/>
+                            <inertial mass="0.045" pos="0.014 -4.527e-4 -3.953e-5" fullinertia="6.508e-6 1.691e-5 1.494e-5 1.513e-7 -4.796e-8 2.389e-9"/>
+                            <body name="l_3_4" pos="-0.0434 0.0 0.0" >
+                                <geom class="visual_l_2_4"/>
+                                <joint name="j_3_4" pos="0.0 0.0 0.0" axis="0 1 0" limited="true" range="-6.28 6.28"/>
+                                <inertial mass="0.041" pos="0.012 -2.269e-4 -4.676e-5" fullinertia="5.331e-6 1.086e-5 9.902e-6 -6.732e-8 -1.806e-8 6.130e-10"/>
+                                <body name="l_3_tip" pos="-0.0315 0.0 0.0" >
+                                    <inertial mass="0.015" pos="0.045 -4.360e-4 -7.220e-8" fullinertia="9.617e-7 1.595e-6 1.300e-6 3.158e-8 2.069e-12 1.087e-11"/>
+                                    <geom class="visual_l_2_tip"/>
+                                </body>
+                            </body>
+                        </body>
+                    </body>
+                </body>
+            </body>
+        </body>
+    </worldbody>
+</mujoco>

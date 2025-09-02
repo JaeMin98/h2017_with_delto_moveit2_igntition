@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="h2017_with_delto_gripper">
+    <xacro:arg name="initial_positions_file" default="initial_positions.yaml" />
+
+    <!-- Import h2017_with_delto_gripper urdf file -->
+    <xacro:include filename="$(find dsr_description2)/xacro/h2017_with_delto_gripper.urdf.xacro" />
+
+    <!-- Import control_xacro -->
+    <xacro:include filename="h2017_with_delto_gripper.ros2_control.xacro" />
+
+
+    <xacro:h2017_with_delto_gripper_ros2_control name="FakeSystem" initial_positions_file="$(arg initial_positions_file)"/>
+
+</robot>
