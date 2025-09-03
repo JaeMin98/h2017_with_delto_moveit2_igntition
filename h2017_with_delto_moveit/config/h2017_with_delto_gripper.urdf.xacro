@@ -3,7 +3,7 @@
     <xacro:arg name="initial_positions_file" default="initial_positions.yaml" />
 
     <!-- Import h2017_with_delto_gripper urdf file -->
-    <xacro:include filename="$(find dsr_description2)/xacro/h2017_with_delto_gripper.urdf.xacro" />
+    <xacro:include filename="$(find h2017_with_delto_moveit)/description/xacro/h2017_with_delto_gripper.urdf.xacro" />
 
     <!-- Import control_xacro -->
     <xacro:include filename="h2017_with_delto_gripper.ros2_control.xacro" />
