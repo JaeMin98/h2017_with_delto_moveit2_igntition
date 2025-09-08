@@ -3,10 +3,10 @@ import os
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch.actions import IncludeLaunchDescription, DeclareLaunchArgument, SetEnvironmentVariable, RegisterEventHandler
+from launch.event_handlers import OnProcessStart, OnProcessExit # OnProcessStart 추가
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
-from launch.event_handlers import OnProcessExit
 import xacro
 
 def generate_launch_description():
@@ -120,7 +120,7 @@ def generate_launch_description():
     )
 
     # =============================================================================
-    # === 8. LaunchDescription 구성 및 반환 ===
+    # === 8. LaunchDescription 구성 및 반환 (수정된 이벤트 핸들러 적용) ===
     # =============================================================================
     return LaunchDescription([
         set_gazebo_resource_path,
@@ -131,22 +131,25 @@ def generate_launch_description():
         gazebo,
         node_robot_state_publisher,
         controller_manager_node,
+        
+        # *** 수정된 부분 ***
+        # controller_manager_node가 시작(OnProcessStart)되면 스포너들을 실행
         RegisterEventHandler(
-            event_handler=OnProcessExit(
+            event_handler=OnProcessStart(
                 target_action=controller_manager_node,
-                on_exit=[joint_state_broadcaster_spawner],
+                on_start=[joint_state_broadcaster_spawner],
             )
         ),
         RegisterEventHandler(
-            event_handler=OnProcessExit(
+            event_handler=OnProcessStart(
                 target_action=controller_manager_node,
-                on_exit=[arm_controller_spawner],
+                on_start=[arm_controller_spawner],
             )
         ),
         RegisterEventHandler(
-            event_handler=OnProcessExit(
+            event_handler=OnProcessStart(
                 target_action=controller_manager_node,
-                on_exit=[gripper_controller_spawner],
+                on_start=[gripper_controller_spawner],
             )
         ),
         spawn_entity
