@@ -1,0 +1,16 @@
+bridges:
+  - topic_name: '/joint_states'
+    ros2_msg_type: 'sensor_msgs/msg/JointState'
+    ign_msg_type: 'gz.msgs.Model'
+    direction: 1  # BIDIR
+    queue_size: 1
+  - topic_name: '/clock'
+    ros2_msg_type: 'rosgraph_msgs/msg/Clock'
+    ign_msg_type: 'gz.msgs.Clock'
+    direction: 0  # IGN_TO_ROS
+  - topic_name: '/tf'
+    ros2_msg_type: 'tf2_msgs/msg/TFMessage'
+    ign_msg_type: 'gz.msgs.Pose_V'
+    direction: 1  # BIDIR
+    queue_size: 10
+  # Gripper나 추가 토픽 필요 시 여기에 추가
