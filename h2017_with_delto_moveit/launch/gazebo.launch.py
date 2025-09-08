@@ -16,7 +16,7 @@ def generate_launch_description():
     # =============================================================================
     # URDF/Xacro 파일이 있는 패키지 이름
     pkg_name = 'h2017_with_delto_moveit'
-    # 패키지 내의 URDF/Xacro 파일 상대 경로
+    # 패키지 내의 URDF/Xacro 파일 상대 경로 (기존)
     file_subpath = 'config/h2017_with_delto_gripper.urdf'
     # Gazebo 내에서 사용할 로봇 이름
     robot_name_in_gazebo = 'h2017'
@@ -37,12 +37,18 @@ def generate_launch_description():
     # =============================================================================
     # === 3. URDF/Xacro 파일 처리 ===
     # =============================================================================
+    # URDF/Xacro 파일의 절대 경로 생성 (pkg_share_path 기반)
     urdf_file_path = os.path.join(pkg_share_path, file_subpath)
-    try:
+    print(f"Loading robot description from: {urdf_file_path}")
+    robot_description_raw = ""
+
+    # 확장자가 .xacro이면 xacro로 처리, 그렇지 않으면 일반 파일로 읽음
+    if urdf_file_path.endswith('.xacro'):
         robot_description_raw = xacro.process_file(urdf_file_path).toxml()
-    except Exception as e:
-        print(f"Error processing XACRO file: {e}")
-        robot_description_raw = ""
+    else:
+        with open(urdf_file_path, 'r') as f:
+            robot_description_raw = f.read()
+
 
     # =============================================================================
     # === 4. Robot State Publisher 노드 설정 ===
