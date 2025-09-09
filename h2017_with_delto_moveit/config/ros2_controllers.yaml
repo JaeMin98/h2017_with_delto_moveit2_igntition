@@ -28,6 +28,10 @@ arm_trajectory_controller:
     state_interfaces:
       - position
       - velocity
+    state_publish_rate: 50.0  # Hz
+    action_monitor_rate: 20.0 # Hz
+    allow_partial_joints_goal: false
+    
 gripper_action_controller:
   ros__parameters:
     joints:
@@ -48,3 +52,6 @@ gripper_action_controller:
     state_interfaces:
       - position
       - velocity
+    state_publish_rate: 50.0  # Hz
+    action_monitor_rate: 20.0 # Hz
+    allow_partial_joints_goal: false
