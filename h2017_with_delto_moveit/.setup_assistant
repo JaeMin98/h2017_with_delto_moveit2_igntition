@@ -1,7 +1,7 @@
 moveit_setup_assistant_config:
   urdf:
-    package: dsr_description2
-    relative_path: xacro/h2017_with_delto_gripper.urdf.xacro
+    package: h2017_with_delto_moveit
+    relative_path: description/xacro/h2017_with_delto_gripper.urdf.xacro
   srdf:
     relative_path: config/h2017_with_delto_gripper.srdf
   package_settings:
