@@ -138,11 +138,12 @@
 
         </ros2_control>
         
-        <gazebo>
-	    <plugin name="gz_ros2_control::GazeboSimROS2ControlPlugin"
-		    filename="libgz_ros2_control-system.so">
-		<parameters>$(find h2017_with_delto_moveit)/config/ros2_controllers.yaml</parameters>
-	    </plugin>
-	</gazebo>
+        
+  <gazebo>
+    <plugin filename="libgz_ros2_control-system.so" name="gz_ros2_control::GazeboSimROS2ControlPlugin">
+      <parameters>/home/smartcps/ros2_ws/install/share/h2017_with_delto_moveit/config/ros2_controllers.yaml</parameters>
+    </plugin>
+  </gazebo>
+
     </xacro:macro>
 </robot>
