@@ -14,7 +14,7 @@ from pcg_gazebo.parsers.sdf import SDF, create_sdf_element
 def main():
     # Total mass taken from datasheet (given as ~18.0kg)
     # You can also use your own estimate of total mass if you managed to weigh Panda yourself :)
-    total_mass = 18.0
+    total_mass = 74.0
     if len(sys.argv) > 1:
         if float(sys.argv[1]) > 0.0:
             total_mass = float(sys.argv[1])
@@ -101,7 +101,7 @@ def main():
 
     # Create a new SDF with one model
     sdf = SDF()
-    sdf.add_model(name="panda")
+    sdf.add_model(name="h2017")
     model = sdf.models[0]
 
     # Set inertial properties for each link into the SDF
@@ -125,7 +125,7 @@ def main():
         model.add_link(link_name, link)
 
     # Write into output file
-    output_file = "panda_inertial_out.sdf"
+    output_file = "h2017_inertial_out.sdf"
     sdf.export_xml(output_file)
     print('Results written into "%s"' % output_file)
 

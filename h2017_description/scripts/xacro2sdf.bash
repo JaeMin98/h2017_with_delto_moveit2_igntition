@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
-# This script converts xacro (URDF variant) into SDF for `panda_description` package
+# This script converts xacro (URDF variant) into SDF for `h2017_description` package
 
 SCRIPT_DIR="$(cd "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")" &>/dev/null && pwd)"
-XACRO_PATH="$(dirname "${SCRIPT_DIR}")/urdf/panda.urdf.xacro"
-SDF_PATH="$(dirname "${SCRIPT_DIR}")/panda/model.sdf"
+XACRO_PATH="$(dirname "${SCRIPT_DIR}")/urdf/h2017.urdf.xacro"
+SDF_PATH="$(dirname "${SCRIPT_DIR}")/h2017/model.sdf"
 
 # Arguments for xacro
 XACRO_ARGS=(
-    name:=panda
+    name:=h2017
     gripper:=true
     collision_arm:=true
     collision_gripper:=true

@@ -1,5 +1,5 @@
 <sdf version='1.9'>
-  <model name='h2017_with_delto_gripper'>
+  <model name='h2017'>
     <link name='base_link'>
       <inertial>
         <pose>1.8e-05 -0.002377 0.095608 0 -0 0</pose>
